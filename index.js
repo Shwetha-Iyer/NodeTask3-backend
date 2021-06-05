@@ -4,7 +4,6 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const url_shortner = require("node-url-shortener");
 const uniqid = require("uniqid");
 require("dotenv").config();
 const app = express();
