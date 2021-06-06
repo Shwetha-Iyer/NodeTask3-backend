@@ -13,6 +13,7 @@ app.use(express.json());
 const dbURL = process.env.DB_URL;
 const objectId = mongodb.ObjectID;
 app.use(cors());
+const URL="https://competent-poincare-02e6d8.netlify.app/";
 
 app.get("/",(req,res)=>{
     res.status(200).send("Hello There! This page works");
@@ -46,7 +47,7 @@ app.post("/signup", async(req,res)=>{
                 from: 'shwetha.iyer@hotmail.com', // sender address
                 to: req.body.email, // list of receivers
                 subject: "Account Activation link", // Subject line
-                text: `Hello, Please click on the link to activate your account   ${signup_token}`, // plain text body 
+                text: `Hello, Please click on the link to activate your account   ${URL+"activateaccount/"+signup_token}`, // plain text body 
               });
               console.log("Message sent: %s", info.messageId);
               console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
@@ -140,7 +141,7 @@ app.post("/forgot",async(req,res)=>{
                 from: 'shwetha.iyer@hotmail.com', // sender address
                 to: req.body.email, // list of receivers
                 subject: "Password Reset link", // Subject line
-                text: `Hello, Please click on the link to reset your password ${pwd_token}`, // plain text body 
+                text: `Hello, Please click on the link to reset your password   ${URL+"resetpwd/"+pwd_token}`, // plain text body 
               });
               console.log("Message sent: %s", info.messageId);
               console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
