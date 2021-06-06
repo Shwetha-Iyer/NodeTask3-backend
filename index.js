@@ -263,5 +263,19 @@ app.post("/urlshorten/:id",async(req,res)=>{
     }
 });
 
+app.put("/updatecount/:id",async(req,res)=>{
+    try{
+        let client = await mongoClient.connect(dbURL);
+        let db = client.db(process.env.DB_NAME);
+        await db.collection("users").updateOne({_id:objectId(req.params.id),"url.s_url":req.body.s_url},{$inc:{"url.$.count":1}});
+        res.status(200).send("Succcess");
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Internal Server Error",
+        });
+    }
+});
 
 app.listen(port, () => console.log("App index.js is running on port:", port));
